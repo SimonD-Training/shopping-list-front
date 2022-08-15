@@ -1,0 +1,130 @@
+<div style="width: 80%; height: fit-content; margin: 10%">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Item Name</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr #row *ngFor="let item of Items; let i = index">
+					<td>
+						<input
+							[readonly]="listArray[i].toggle"
+							class="flex-grow-1"
+							type="text"
+							style="border-style: none"
+							[(ngModel)]="Items[i].name" />
+					</td>
+					<td>
+						<select
+							[disabled]="listArray[i].toggle"
+							class="flex-grow-1"
+							type="text"
+							style="border-style: none"
+							[(ngModel)]="Items[i].category">
+							<option
+								[selected]="category.name == item.category"
+								*ngFor="let category of Categories"
+								[value]="category.name">
+								{{ category.name }}
+							</option>
+						</select>
+					</td>
+					<td>
+						$
+						<input
+							[readonly]="listArray[i].toggle"
+							class="flex-grow-1"
+							type="number"
+							style="border-style: none"
+							[(ngModel)]="Items[i].price" />
+					</td>
+					<td>
+						<input
+							[readonly]="listArray[i].toggle"
+							class="flex-grow-1"
+							type="number"
+							style="border-style: none"
+							[(ngModel)]="Items[i].quantity" />
+					</td>
+					<td class="d-flex justify-content-between">
+						<i
+							[class]="listArray[i].class"
+							(click)="
+								listArray[i].toggle
+									? (listArray[i].class = 'fa fa-plus') &&
+									  (listArray[i].toggle = !listArray[i].toggle)
+									: (listArray[i].class = 'fa fa-pencil') &&
+									  (listArray[i].toggle = !listArray[i].toggle) &&
+									  updateItem(item._id!, Items[i])
+							"
+							style="font-size: 32px"></i>
+						<i
+							class="fa fa-remove"
+							(click)="deleteItem(item._id!)"
+							style="font-size: 32px"></i>
+						<i
+							class="fa fa-check"
+							(click)="mark(row)"
+							style="font-size: 32px"></i>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input
+							class="flex-grow-1"
+							type="text"
+							style="border-style: none"
+							placeholder="New Item"
+							[(ngModel)]="newItem.name" />
+					</td>
+					<td>
+						<select
+							class="flex-grow-1"
+							type="text"
+							style="border-style: none"
+							placeholder="+"
+							[(ngModel)]="newItem.category">
+							<option selected disabled [value]="undefined">
+								Select an Option
+							</option>
+							<option
+								*ngFor="let category of Categories"
+								[value]="category.name">
+								{{ category.name }}
+							</option>
+						</select>
+					</td>
+					<td>
+						$
+						<input
+							class="flex-grow-1"
+							type="number"
+							style="border-style: none"
+							placeholder="+"
+							[(ngModel)]="newItem.price" />
+					</td>
+					<td>
+						<input
+							class="flex-grow-1"
+							type="number"
+							style="border-style: none"
+							placeholder="+"
+							[(ngModel)]="newItem.quantity" />
+					</td>
+					<td style="text-align: center">
+						<i
+							class="fa fa-plus"
+							(click)="createItem(newItem)"
+							style="font-size: 32px"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

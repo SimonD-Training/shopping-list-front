@@ -1,0 +1,57 @@
+<div style="width: 80%; height: fit-content; margin: 10%">
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Category Name</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let category of Categories; let i = index">
+					<td>
+						<input
+							[readonly]="listArray[i].toggle"
+							class="flex-grow-1"
+							type="text"
+							style="border-style: none; width: 100%"
+							[(ngModel)]="Categories[i].name" />
+					</td>
+					<td class="d-flex justify-content-between">
+						<i
+							[class]="listArray[i].class"
+							(click)="
+								listArray[i].toggle
+									? (listArray[i].class = 'fa fa-plus') &&
+									  (listArray[i].toggle = !listArray[i].toggle)
+									: (listArray[i].class = 'fa fa-pencil') &&
+									  (listArray[i].toggle = !listArray[i].toggle) &&
+									  updateCategory(category._id!, Categories[i])
+							"
+							style="font-size: 32px"></i
+						><i
+							class="fa fa-remove"
+							(click)="deleteCategory(category._id!)"
+							style="font-size: 32px"></i>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<input
+							class="flex-grow-1"
+							type="text"
+							style="border-style: none; width: 100%"
+							placeholder="New Category"
+							[(ngModel)]="newCat.name" />
+					</td>
+					<td style="text-align: center">
+						<i
+							class="fa fa-plus"
+							(click)="createCategory(newCat)"
+							style="font-size: 32px"></i>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
