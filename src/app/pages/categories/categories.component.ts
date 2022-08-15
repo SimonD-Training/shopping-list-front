@@ -23,11 +23,13 @@ export class CategoriesComponent implements AfterViewInit {
 	@ViewChild('popup') Popup!: ElementRef<HTMLSpanElement>
 	popupMsg = ''
 	popupFunc!: Function
+	popupCancel() {
+		this.Popup.nativeElement.style.display = 'none'
+	}
 
 	ngAfterViewInit(): void {
 		this.Popup.nativeElement.style.borderRadius = '5px'
 		this.Popup.nativeElement.style.padding = '20px'
-		this.Popup.nativeElement.style.background = 'var(--bs-warning)'
 		this.Popup.nativeElement.style.position = 'fixed'
 		this.Popup.nativeElement.style.top = '50%'
 		this.Popup.nativeElement.style.left = '50%'
@@ -66,6 +68,8 @@ export class CategoriesComponent implements AfterViewInit {
 				}
 			})
 		}
-		this.Popup.nativeElement.style.display = 'block'
+		this.Popup.nativeElement.style.display = 'flex'
+		this.Popup.nativeElement.style.flexDirection = 'column'
+		this.Popup.nativeElement.style.alignItems = 'center'
 	}
 }
