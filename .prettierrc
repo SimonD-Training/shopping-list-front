@@ -6,6 +6,6 @@
 	"semi": false,
 	"singleQuote": true,
 	"bracketSameLine": true,
-	"printWidth": 160,
+	"printWidth": 100,
 	"bracketSpacing": true
 }
