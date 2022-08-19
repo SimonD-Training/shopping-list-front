@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core'
 import { Category } from 'src/app/interfaces/categories.interface'
 import { ShoppingService } from 'src/app/services/shopping.service'
-
+/**
+ * Component for displaying categories
+ */
 @Component({
 	selector: 'app-categories',
 	templateUrl: './categories.component.html',
@@ -11,6 +13,10 @@ export class CategoriesComponent implements AfterViewInit {
 	listArray: { class: string; toggle: boolean }[] = []
 	Categories: Category[] = []
 	newCat: any = {}
+	/**
+	 * Initiates the Categories array upon construction
+	 * @param shoppingService
+	 */
 	constructor(private shoppingService: ShoppingService) {
 		shoppingService.getCategories().subscribe((data) => {
 			this.Categories = data ?? []
@@ -37,6 +43,10 @@ export class CategoriesComponent implements AfterViewInit {
 		this.Popup.nativeElement.style.display = 'none'
 	}
 
+	/**
+	 * Sends an http request for the creation of a new Category
+	 * @param category - New Category
+	 */
 	createCategory(category: Category) {
 		if (category.name == undefined) return
 		this.shoppingService.createCategory(category).subscribe((data) => {
@@ -49,6 +59,11 @@ export class CategoriesComponent implements AfterViewInit {
 		})
 	}
 
+	/**
+	 * Sends an http request for the modification of a Category
+	 * @param id - The id of the Category
+	 * @param category - The new state of the Category
+	 */
 	updateCategory(id: string, category: Category) {
 		this.shoppingService.updateCategory(id, category).subscribe((data) => {
 			if (data) {
@@ -57,6 +72,10 @@ export class CategoriesComponent implements AfterViewInit {
 		})
 	}
 
+	/**
+	 * Sends an http request for the deletion of a Category
+	 * @param id - The id of the Category
+	 */
 	deleteCategory(id: string) {
 		this.popupMsg = 'Deleting a category will also delete all dependent items!'
 		this.popupFunc = () => {
