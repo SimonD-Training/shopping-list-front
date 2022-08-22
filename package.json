@@ -7,7 +7,7 @@
 	},
 	"scripts": {
 		"ng": "ng",
-		"start": "ng serve",
+		"start": "cd dist/shopping-list-front",
 		"build": "ng build",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test"
