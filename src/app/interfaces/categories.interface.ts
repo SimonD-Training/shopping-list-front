@@ -1,3 +1,8 @@
+/**
+ * Represents a category of items
+ * @param name
+ * @param _id
+ */
 export class Category {
 	_id?: string
 	name: string

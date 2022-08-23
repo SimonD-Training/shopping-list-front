@@ -3,6 +3,9 @@ import { Category } from 'src/app/interfaces/categories.interface'
 import { Item } from 'src/app/interfaces/item.interface'
 import { ShoppingService } from 'src/app/services/shopping.service'
 
+/**
+ * Component for displaying the shopping list
+ */
 @Component({
 	selector: 'app-shoplist',
 	templateUrl: './shoplist.component.html',
@@ -27,6 +30,10 @@ export class ShoplistComponent implements OnInit {
 
 	ngOnInit(): void {}
 
+	/**
+	 * Sends an http request for the creation of a new Item
+	 * @param item - New item
+	 */
 	createItem(item: Item) {
 		if (
 			item.category == undefined ||
@@ -49,10 +56,19 @@ export class ShoplistComponent implements OnInit {
 		})
 	}
 
-	mark(row: HTMLTableRowElement) {
+	/**
+	 * Toggles the 'marked' class of a given row
+	 * @param row The row to modify
+	 */
+	mark(row: HTMLTableRowElement):void {
 		row.classList.toggle('marked')
 	}
 
+	/**
+	 * Sends an http request for the modification of an Item
+	 * @param id - The id of the item
+	 * @param item - The new state of the item
+	 */
 	updateItem(id: string, item: Item) {
 		this.shoppingService.updateItem(id, item).subscribe((data) => {
 			if (data) {
@@ -61,6 +77,10 @@ export class ShoplistComponent implements OnInit {
 		})
 	}
 
+	/**
+	 * Sends an http request for the deletion of an Item
+	 * @param id  - the id of the item
+	 */
 	deleteItem(id: string) {
 		this.shoppingService.deleteItem(id).subscribe((data) => {
 			if (data) {
